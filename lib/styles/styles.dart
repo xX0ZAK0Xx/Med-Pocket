@@ -10,6 +10,13 @@ LinearGradient redGradient() => const LinearGradient(
           Colors.pink,
           Colors.red,
         ]);
+LinearGradient pinkGradient() => LinearGradient(
+        begin: Alignment.bottomRight,
+        end: Alignment.topLeft,
+        colors: [
+          Colors.red.shade50,
+          Colors.red.shade100,
+        ]);
 
 LinearGradient bgGradient() => LinearGradient(
         begin: Alignment.topCenter,

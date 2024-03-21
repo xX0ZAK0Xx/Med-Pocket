@@ -10,6 +10,7 @@ void main() async {
   await Hive.initFlutter();
   var user = await Hive.openBox('user');
   var bmiList = await Hive.openBox('bmiList');
+  var bloodo2 = await Hive.openBox('bloodo2');
 
   DataList.fetchData();
   // user.clear();
