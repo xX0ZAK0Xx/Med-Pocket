@@ -35,7 +35,7 @@ class _GraphState extends State<Graph> {
         ColumnSeries<dynamic, String>(
           borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15) ),
           gradient: redGradient(),
-          width: 0.1,
+          width: 0.15,
           dataSource: DataList.allBMI,
           xValueMapper: (data, index) => "${index+1}: ${data[0]}",
           yValueMapper: (data, _) => data[1],

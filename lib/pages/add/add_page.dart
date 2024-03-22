@@ -7,7 +7,6 @@ import 'package:med_pocket/common/styles/styles.dart';
 import 'package:med_pocket/common/widgets/get_height.dart';
 import 'package:med_pocket/common/widgets/number_box.dart';
 import 'package:med_pocket/controller/navigation_controller.dart';
-import 'package:med_pocket/controller/user_info_controller.dart';
 import 'package:med_pocket/data/dataList.dart';
 import 'package:med_pocket/pages/add/widget/gradient_buton.dart';
 
@@ -17,7 +16,6 @@ class AddPage extends StatelessWidget {
   TextEditingController heightFTController = TextEditingController();
   TextEditingController heightINController = TextEditingController();
   NavigationController controller = Get.put(NavigationController());
-  UserInfoController userInfoController = Get.put(UserInfoController());
 
   var user = Hive.box('user');
   var bmiList = Hive.box('bmiList');
@@ -34,10 +32,8 @@ class AddPage extends StatelessWidget {
   void save() {
     bmi = Calculation.calculateBMI(heightFTController.text,
         heightINController.text, weightController.text);
-    user.put('bmi', bmi);
     DataList.addBMI(['${DateTime.now().day}/${DateTime.now().month}', bmi]);
     controller.changePage(0);
-    userInfoController.bmi.value = bmi;
     weightController.clear();
     heightFTController.clear();
     heightINController.clear();

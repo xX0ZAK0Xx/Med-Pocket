@@ -11,6 +11,7 @@ void main() async {
   var user = await Hive.openBox('user');
   var bmiList = await Hive.openBox('bmiList');
   var bloodo2 = await Hive.openBox('bloodo2');
+  var bloodGlucose = await Hive.openBox('bloodGlucose');
 
   DataList.fetchData();
   // user.clear();

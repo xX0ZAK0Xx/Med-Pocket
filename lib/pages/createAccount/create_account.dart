@@ -5,7 +5,6 @@ import 'package:med_pocket/common/calculation/calculation.dart';
 import 'package:med_pocket/common/widgets/get_height.dart';
 import 'package:med_pocket/common/widgets/number_box.dart';
 import 'package:med_pocket/common/widgets/text_box.dart';
-import 'package:med_pocket/controller/user_info_controller.dart';
 import 'package:med_pocket/data/dataList.dart';
 import 'package:med_pocket/pages/navigation/navigation_page.dart';
 import 'package:med_pocket/common/styles/styles.dart';
@@ -17,7 +16,6 @@ class CreateAccount extends StatelessWidget {
   final TextEditingController heightINController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
 
-  UserInfoController userInfoController = Get.put(UserInfoController());
   var bmi = 0.0, weight = 0.0, height = 0.0;
   @override
   Widget build(BuildContext context) {
@@ -74,12 +72,10 @@ class CreateAccount extends StatelessWidget {
                             heightINController.text, weightController.text);
                         user.put('name', nameController.text);
                         user.put('weight', double.parse(weightController.text));
-                        user.put('bmi', bmi);
                         DataList.addBMI([
                           '${DateTime.now().day}/${DateTime.now().month}',
                           bmi
                         ]);
-                        userInfoController.fetchBMI();
                         Get.offAll(() => const NavigationPage());
                       },
                       child: Container(
