@@ -8,7 +8,7 @@ import 'package:med_pocket/pages/add/add_page.dart';
 import 'package:med_pocket/pages/home/home_page.dart';
 import 'package:med_pocket/pages/medicine/medicine_page.dart';
 import 'package:med_pocket/pages/profile/profile_page.dart';
-import 'package:med_pocket/styles/styles.dart';
+import 'package:med_pocket/common/styles/styles.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -28,7 +28,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
   List pages = [
     HomePage(),
-    const AddPage(),
+    AddPage(),
     const MedicinePage(),
     const ProfilePage(),
   ];

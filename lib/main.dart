@@ -14,6 +14,8 @@ void main() async {
 
   DataList.fetchData();
   // user.clear();
+  // bmiList.clear();
+  // bloodo2.clear();
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     home: const SplashScreen(),

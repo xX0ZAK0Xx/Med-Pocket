@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:med_pocket/data/dataList.dart';
-import 'package:med_pocket/styles/styles.dart';
+import 'package:med_pocket/common/styles/styles.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Graph extends StatefulWidget {
@@ -28,7 +27,7 @@ class _GraphState extends State<Graph> {
         child: SfCartesianChart(
           zoomPanBehavior: ZoomPanBehavior(enablePanning: true),
       primaryXAxis: const CategoryAxis(
-        autoScrollingDelta: 8,
+        autoScrollingDelta: 5,
         autoScrollingMode: AutoScrollingMode.end,
       ),
       tooltipBehavior: _tooltipBehavior,
@@ -38,9 +37,9 @@ class _GraphState extends State<Graph> {
           gradient: redGradient(),
           width: 0.1,
           dataSource: DataList.allBMI,
-          xValueMapper: (data, _) => data[0],
+          xValueMapper: (data, index) => "${index+1}: ${data[0]}",
           yValueMapper: (data, _) => data[1],
-          dataLabelSettings: DataLabelSettings(isVisible: true),
+          dataLabelSettings: const DataLabelSettings(isVisible: true),
         )
       ],
     ));

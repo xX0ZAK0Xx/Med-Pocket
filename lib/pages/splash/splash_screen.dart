@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:med_pocket/pages/createAccount/create_account.dart';
 import 'package:med_pocket/pages/navigation/navigation_page.dart';
-import 'package:med_pocket/styles/styles.dart';
+import 'package:med_pocket/common/styles/styles.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 

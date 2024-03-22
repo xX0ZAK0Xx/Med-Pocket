@@ -8,7 +8,7 @@ import 'package:med_pocket/pages/home/widget/current_bmi.dart';
 import 'package:med_pocket/pages/home/widget/graph.dart';
 import 'package:med_pocket/pages/home/widget/home_header.dart';
 import 'package:med_pocket/pages/home/widget/pressure_text.dart';
-import 'package:med_pocket/styles/styles.dart';
+import 'package:med_pocket/common/styles/styles.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});

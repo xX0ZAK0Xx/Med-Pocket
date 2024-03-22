@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:med_pocket/styles/styles.dart';
+import 'package:med_pocket/common/styles/styles.dart';
 
 class BloodGlucose extends StatelessWidget {
   const BloodGlucose({
