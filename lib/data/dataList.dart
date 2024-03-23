@@ -6,16 +6,20 @@ class DataList {
   static Box bloodGlucoseBox = Hive.box('bloodGlucose');
 
   static List<List<dynamic>> allBMI = [];
-  static List<dynamic> allBloodO2 = [];
-  static List<dynamic> allBloodGlucose = [];
+  static List<double> allBloodO2 = [];
+  static List<double> allBloodGlucose = [];
   static void fetchData() {
     allBMI = bmiBox.values.toList().cast<List<dynamic>>();
-    allBloodGlucose = bloodGlucoseBox.values.toList().cast<List<dynamic>>();
-    allBloodO2 = bloodo2Box.values.toList().cast<List<dynamic>>();
+    allBloodGlucose = bloodGlucoseBox.values.toList().cast<double>();
+    allBloodO2 = bloodo2Box.values.toList().cast<double>();
   }
 
   static void addBMI(List<dynamic> bmi) {
     bmiBox.add(bmi);
     allBMI.add(bmi);
+  }
+  static void addBloodO2(double bloodo2) {
+    bloodo2Box.add(bloodo2);
+    allBloodO2.add(bloodo2);
   }
 }

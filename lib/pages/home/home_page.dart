@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:med_pocket/controller/navigation_controller.dart';
+import 'package:med_pocket/data/dataList.dart';
 import 'package:med_pocket/pages/home/widget/blood_glucose.dart';
 import 'package:med_pocket/pages/home/widget/blood_oxygen.dart';
 import 'package:med_pocket/pages/home/widget/current_bmi.dart';
@@ -16,8 +17,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
-    int bloodo2 = user.get('bloodo2') ?? 98;
-    double bloodGlucose = user.get('bloodo2') ?? 6.5;
+    double bloodo2 = DataList.allBloodO2.isEmpty ? 98.0 : DataList.allBloodO2.last;
+    double bloodGlucose =  DataList.allBloodGlucose.isEmpty ? 6.5 : DataList.allBloodGlucose.last;
     int highPressure = user.get('highPressure') ?? 125;
     int lowPressure = user.get('lowPressure') ?? 82;
     NavigationController navigationController = Get.put(NavigationController());

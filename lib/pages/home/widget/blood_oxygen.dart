@@ -9,7 +9,7 @@ class BloodOxygen extends StatelessWidget {
   });
 
   final double screenWidth;
-  final int bloodo2;
+  final double bloodo2;
 
   @override
   Widget build(BuildContext context) {

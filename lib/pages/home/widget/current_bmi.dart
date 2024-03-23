@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:med_pocket/common/styles/styles.dart';
-import 'package:med_pocket/controller/user_info_controller.dart';
 import 'package:med_pocket/data/dataList.dart';
 
 class CurrentBMI extends StatefulWidget {
