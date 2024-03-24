@@ -34,11 +34,29 @@ class AddPage extends StatelessWidget {
 
   var bmi = 0.0, height = 0.0;
   void saveBloodO2() {
-    var value = double.parse(bloodO2Controller.text);
+    double value;
+    try{
+      value = double.parse(bloodO2Controller.text);
+    }catch(e){
+      value = 0.0;
+    }
     double bloodO2 = double.parse(value.toStringAsFixed(1));
     DataList.addBloodO2(bloodO2);
     buttonInfoController.changeBloodO2(bloodO2);
     bloodO2Controller.clear();
+  }
+
+  void saveBloodGlucose() {
+    double value;
+    try{
+      value = double.parse(bloodGlucoseController.text);
+    }catch(e){
+      value = 0.0;
+    }
+    double bloodGlucose = double.parse(value.toStringAsFixed(1));
+    DataList.addBloodGlucose(bloodGlucose);
+    buttonInfoController.changeBloodGlucose(bloodGlucose);
+    bloodGlucoseController.clear();
   }
 
   void save() {
@@ -121,16 +139,16 @@ class AddPage extends StatelessWidget {
                           dialoge(context, "Add new blood O2",
                               bloodO2Controller, saveBloodO2);
                         },
-                        // value: D,ataList.allBloodO2.isEmpty
-                        //     ? ""
-                        //     : DataList.allBloodO2.last.toString(),
                         value: buttonInfoController.bloodO2.toString(),
                       ),
                       MiniButton(
                         width: (screenWidth - 24) / 3 - 10,
                         text: 'Glucose Level',
-                        onTap: () {},
-                        value: '',
+                        onTap: () {
+                          dialoge(context, "Add new Gloocose",
+                              bloodGlucoseController, saveBloodGlucose);
+                        },
+                        value: buttonInfoController.bloodGlucose.toString(),
                       ),
                       MiniButton(
                         width: (screenWidth - 24) / 3 - 10,
@@ -237,7 +255,7 @@ class MiniButton extends StatelessWidget {
               style: headline(),
             ),
             Text(
-              value!='0.0' ? value : "",
+              value != '0.0' ? value : "",
               style: headline(),
             ),
           ],

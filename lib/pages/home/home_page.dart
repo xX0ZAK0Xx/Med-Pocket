@@ -34,12 +34,12 @@ class HomePage extends StatelessWidget {
                 height: 20,
               ),
               //--------- Current BMI --------
-              CurrentBMI(),
+              const CurrentBMI(),
               const SizedBox(
                 height: 20,
               ),
               //--------- Graph --------
-              Graph(),
+              const Graph(),
               const SizedBox(
                 height: 20,
               ),

@@ -22,4 +22,8 @@ class DataList {
     bloodo2Box.add(bloodo2);
     allBloodO2.add(bloodo2);
   }
+  static void addBloodGlucose(double bloodGlucose) {
+    bloodGlucoseBox.add(bloodGlucose);
+    allBloodGlucose.add(bloodGlucose);
+  }
 }
