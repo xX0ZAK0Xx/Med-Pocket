@@ -17,10 +17,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
-    double bloodo2 = DataList.allBloodO2.isEmpty ? 98.0 : DataList.allBloodO2.last;
-    double bloodGlucose =  DataList.allBloodGlucose.isEmpty ? 6.5 : DataList.allBloodGlucose.last;
-    int highPressure = user.get('highPressure') ?? 125;
-    int lowPressure = user.get('lowPressure') ?? 82;
+    double bloodo2 =
+        DataList.allBloodO2.isEmpty ? 98.0 : DataList.allBloodO2.last;
+    double bloodGlucose =
+        DataList.allBloodGlucose.isEmpty ? 6.5 : DataList.allBloodGlucose.last;
+    int highPressure =
+        DataList.allPressure.isEmpty ? 125 : DataList.allPressure.last[0];
+    int lowPressure =
+        DataList.allPressure.isEmpty ? 85 : DataList.allPressure.last[1];
     NavigationController navigationController = Get.put(NavigationController());
     return Padding(
       padding: const EdgeInsets.all(12.0),

@@ -18,6 +18,8 @@ class AddPage extends StatelessWidget {
   TextEditingController heightINController = TextEditingController();
   TextEditingController bloodO2Controller = TextEditingController();
   TextEditingController bloodGlucoseController = TextEditingController();
+  TextEditingController highController = TextEditingController();
+  TextEditingController lowController = TextEditingController();
   NavigationController controller = Get.put(NavigationController());
   ButtonInfoController buttonInfoController = Get.put(ButtonInfoController());
 
@@ -35,9 +37,9 @@ class AddPage extends StatelessWidget {
   var bmi = 0.0, height = 0.0;
   void saveBloodO2() {
     double value;
-    try{
+    try {
       value = double.parse(bloodO2Controller.text);
-    }catch(e){
+    } catch (e) {
       value = 0.0;
     }
     double bloodO2 = double.parse(value.toStringAsFixed(1));
@@ -48,15 +50,30 @@ class AddPage extends StatelessWidget {
 
   void saveBloodGlucose() {
     double value;
-    try{
+    try {
       value = double.parse(bloodGlucoseController.text);
-    }catch(e){
+    } catch (e) {
       value = 0.0;
     }
     double bloodGlucose = double.parse(value.toStringAsFixed(1));
     DataList.addBloodGlucose(bloodGlucose);
     buttonInfoController.changeBloodGlucose(bloodGlucose);
     bloodGlucoseController.clear();
+  }
+
+  void savePressure() {
+    int highPressure, lowPressure;
+    try {
+      highPressure = double.parse(highController.text).toInt();
+      lowPressure = double.parse(lowController.text).toInt();
+    } catch (e) {
+      highPressure = 0;
+      lowPressure = 0;
+    }
+    DataList.addPressure(highPressure, lowPressure);
+    buttonInfoController.changePressure(highPressure, lowPressure);
+    highController.clear();
+    lowController.clear();
   }
 
   void save() {
@@ -153,8 +170,12 @@ class AddPage extends StatelessWidget {
                       MiniButton(
                         width: (screenWidth - 24) / 3 - 10,
                         text: 'Pressure',
-                        onTap: () {},
-                        value: '',
+                        onTap: () {
+                          dialoge2(context, "Add new Pressure", highController,
+                              lowController, savePressure);
+                        },
+                        value:
+                            '${buttonInfoController.highPressure}   ${buttonInfoController.lowPressure}',
                       ),
                     ],
                   ))
@@ -220,6 +241,59 @@ class AddPage extends StatelessWidget {
               ],
             ));
   }
+
+  Future<dynamic> dialoge2(
+      BuildContext context,
+      String title,
+      TextEditingController highController,
+      TextEditingController lowController,
+      Function() save) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: Text(title),
+              actions: [
+                Row(
+                  children: [
+                    Expanded(
+                        child: NumberBox(
+                            hint: "High", controller: highController)),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                        child:
+                            NumberBox(hint: "Low", controller: lowController)),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    TextButton(
+                        onPressed: () {
+                          highController.clear();
+                          lowController.clear();
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "Cancel",
+                          style: headline(
+                              c: const Color.fromARGB(255, 255, 157, 150)),
+                        )),
+                    TextButton(
+                        onPressed: () {
+                          save();
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "Save",
+                          style: headline(),
+                        ))
+                  ],
+                )
+              ],
+            ));
+  }
 }
 
 class MiniButton extends StatelessWidget {
@@ -255,7 +329,7 @@ class MiniButton extends StatelessWidget {
               style: headline(),
             ),
             Text(
-              value != '0.0' ? value : "",
+              (value != '0.0' && value != '0   0') ? value : "",
               style: headline(),
             ),
           ],
