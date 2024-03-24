@@ -27,15 +27,19 @@ class AddPage extends StatelessWidget {
   var bmiList = Hive.box('bmiList');
   var bloodo2 = Hive.box('bloodo2');
 
-  void cancel() {
+  void clearControllerAndMove() {
     weightController.clear();
     heightFTController.clear();
     heightINController.clear();
+    bloodO2Controller.clear();
+    bloodGlucoseController.clear();
+    highController.clear();
+    lowController.clear();
     controller.changePage(0);
   }
 
   var bmi = 0.0, height = 0.0;
-  void saveBloodO2() {
+  void saveBloodO2Text() {
     double value;
     try {
       value = double.parse(bloodO2Controller.text);
@@ -43,12 +47,20 @@ class AddPage extends StatelessWidget {
       value = 0.0;
     }
     double bloodO2 = double.parse(value.toStringAsFixed(1));
-    DataList.addBloodO2(bloodO2);
     buttonInfoController.changeBloodO2(bloodO2);
-    bloodO2Controller.clear();
+  }
+
+  void saveBloodO2() {
+    DataList.addBloodO2(buttonInfoController.bloodO2.value);
+    buttonInfoController.changeBloodO2(0.0);
   }
 
   void saveBloodGlucose() {
+    DataList.addBloodGlucose(buttonInfoController.bloodGlucose.value);
+    buttonInfoController.changeBloodGlucose(0.0);
+  }
+
+  void saveBloodGlucoseText() {
     double value;
     try {
       value = double.parse(bloodGlucoseController.text);
@@ -56,12 +68,16 @@ class AddPage extends StatelessWidget {
       value = 0.0;
     }
     double bloodGlucose = double.parse(value.toStringAsFixed(1));
-    DataList.addBloodGlucose(bloodGlucose);
     buttonInfoController.changeBloodGlucose(bloodGlucose);
-    bloodGlucoseController.clear();
   }
 
   void savePressure() {
+    DataList.addPressure(buttonInfoController.highPressure.value,
+        buttonInfoController.lowPressure.value);
+    buttonInfoController.changePressure(0, 0);
+  }
+
+  void savePressureText() {
     int highPressure, lowPressure;
     try {
       highPressure = double.parse(highController.text).toInt();
@@ -70,20 +86,31 @@ class AddPage extends StatelessWidget {
       highPressure = 0;
       lowPressure = 0;
     }
-    DataList.addPressure(highPressure, lowPressure);
     buttonInfoController.changePressure(highPressure, lowPressure);
-    highController.clear();
-    lowController.clear();
   }
 
-  void save() {
+  void saveBMI() {
     bmi = Calculation.calculateBMI(heightFTController.text,
         heightINController.text, weightController.text);
     DataList.addBMI(['${DateTime.now().day}/${DateTime.now().month}', bmi]);
-    controller.changePage(0);
-    weightController.clear();
-    heightFTController.clear();
-    heightINController.clear();
+  }
+
+  void save() {
+    if (heightFTController.text != "" &&
+        heightINController.text != "" &&
+        weightController.text != "") {
+      saveBMI();
+    }
+    if (bloodGlucoseController.text != "") {
+      saveBloodGlucose();
+    }
+    if (bloodO2Controller.text != "") {
+      saveBloodO2();
+    }
+    if (highController.text != "" && lowController.text != "") {
+      savePressure();
+    }
+    clearControllerAndMove();
   }
 
   @override
@@ -154,7 +181,7 @@ class AddPage extends StatelessWidget {
                         text: 'Blood O2',
                         onTap: () {
                           dialoge(context, "Add new blood O2",
-                              bloodO2Controller, saveBloodO2);
+                              bloodO2Controller, saveBloodO2Text);
                         },
                         value: buttonInfoController.bloodO2.toString(),
                       ),
@@ -163,7 +190,7 @@ class AddPage extends StatelessWidget {
                         text: 'Glucose Level',
                         onTap: () {
                           dialoge(context, "Add new Gloocose",
-                              bloodGlucoseController, saveBloodGlucose);
+                              bloodGlucoseController, saveBloodGlucoseText);
                         },
                         value: buttonInfoController.bloodGlucose.toString(),
                       ),
@@ -172,7 +199,7 @@ class AddPage extends StatelessWidget {
                         text: 'Pressure',
                         onTap: () {
                           dialoge2(context, "Add new Pressure", highController,
-                              lowController, savePressure);
+                              lowController, savePressureText);
                         },
                         value:
                             '${buttonInfoController.highPressure}   ${buttonInfoController.lowPressure}',
@@ -188,7 +215,7 @@ class AddPage extends StatelessWidget {
               GradientButton(
                 width: (screenWidth - 24) / 2 - 8,
                 text: 'Cancel',
-                onTap: cancel,
+                onTap: clearControllerAndMove,
                 bgGradient: pinkGradient(),
                 textColor: Colors.red,
               ),
@@ -211,7 +238,7 @@ class AddPage extends StatelessWidget {
     return showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-              title: Text(title),
+              title: Center(child: Text(title)),
               actions: [
                 NumberBox(hint: "", controller: controller),
                 Row(
@@ -251,7 +278,7 @@ class AddPage extends StatelessWidget {
     return showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-              title: Text(title),
+              title: Center(child: Text(title)),
               actions: [
                 Row(
                   children: [
