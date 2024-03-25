@@ -9,7 +9,10 @@ import 'package:med_pocket/common/widgets/number_box.dart';
 import 'package:med_pocket/controller/button_info_controller.dart';
 import 'package:med_pocket/controller/navigation_controller.dart';
 import 'package:med_pocket/data/dataList.dart';
+import 'package:med_pocket/pages/add/widget/dialog1.dart';
+import 'package:med_pocket/pages/add/widget/dialog2.dart';
 import 'package:med_pocket/pages/add/widget/gradient_buton.dart';
+import 'package:med_pocket/pages/add/widget/mini_button.dart';
 
 class AddPage extends StatelessWidget {
   AddPage({super.key});
@@ -231,137 +234,5 @@ class AddPage extends StatelessWidget {
         ],
       )),
     );
-  }
-
-  Future<dynamic> dialoge(BuildContext context, String title,
-      TextEditingController controller, Function() save) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-              title: Center(child: Text(title)),
-              actions: [
-                NumberBox(hint: "", controller: controller),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          controller.clear();
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "Cancel",
-                          style: headline(
-                              c: const Color.fromARGB(255, 255, 157, 150)),
-                        )),
-                    TextButton(
-                        onPressed: () {
-                          save();
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "Save",
-                          style: headline(),
-                        ))
-                  ],
-                )
-              ],
-            ));
-  }
-
-  Future<dynamic> dialoge2(
-      BuildContext context,
-      String title,
-      TextEditingController highController,
-      TextEditingController lowController,
-      Function() save) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-              title: Center(child: Text(title)),
-              actions: [
-                Row(
-                  children: [
-                    Expanded(
-                        child: NumberBox(
-                            hint: "High", controller: highController)),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                        child:
-                            NumberBox(hint: "Low", controller: lowController)),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          highController.clear();
-                          lowController.clear();
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "Cancel",
-                          style: headline(
-                              c: const Color.fromARGB(255, 255, 157, 150)),
-                        )),
-                    TextButton(
-                        onPressed: () {
-                          save();
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "Save",
-                          style: headline(),
-                        ))
-                  ],
-                )
-              ],
-            ));
-  }
-}
-
-class MiniButton extends StatelessWidget {
-  const MiniButton({
-    super.key,
-    required this.width,
-    required this.text,
-    this.onTap,
-    required this.value,
-  });
-
-  final double width;
-  final String text, value;
-  final void Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 100,
-        width: width,
-        decoration: BoxDecoration(
-            gradient: pinkGradient(),
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(width: 1.5, color: Colors.red)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: headline(),
-            ),
-            Text(
-              (value != '0.0' && value != '0   0') ? value : "",
-              style: headline(),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  } 
 }
