@@ -24,6 +24,7 @@ class _GraphState extends State<Graph> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height * 0.3,
         child: SfCartesianChart(
           zoomPanBehavior: ZoomPanBehavior(enablePanning: true),
       primaryXAxis: const CategoryAxis(

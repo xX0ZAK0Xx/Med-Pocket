@@ -34,12 +34,12 @@ class BloodGlucose extends StatelessWidget {
         children: [
           Text(
             "Glucose Level",
-            style: headline(s: 26.0),
+            style: headline(s: 20.0),
           ),
           Text(
             bloodGlucose.toString(),
             style: headline(
-              s: 34.0,
+              s: 30.0,
               c: bloodGlucose > 5.6 && bloodGlucose < 6.9
                   ? const Color.fromARGB(255, 5, 235, 166)
                   : const Color.fromARGB(255, 252, 82, 82),

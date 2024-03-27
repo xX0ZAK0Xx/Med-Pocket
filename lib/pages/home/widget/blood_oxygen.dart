@@ -37,7 +37,7 @@ class BloodOxygen extends StatelessWidget {
               children: [
                 TextSpan(
                   text: 'Blood O',
-                  style: headline(),
+                  style: headline(s: 20.0),
                 ),
                 TextSpan(
                     text: '2',
@@ -49,7 +49,7 @@ class BloodOxygen extends StatelessWidget {
           Text(
             bloodo2.toString(),
             style: headline(
-              s: 34.0,
+              s: 30.0,
               c: bloodo2 > 95 && bloodo2 < 99
                   ? const Color.fromARGB(255, 5, 235, 166)
                   : const Color.fromARGB(255, 252, 82, 82),

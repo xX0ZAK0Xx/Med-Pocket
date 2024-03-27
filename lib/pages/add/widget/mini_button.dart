@@ -19,7 +19,7 @@ class MiniButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 100,
+        height: 120,
         width: width,
         decoration: BoxDecoration(
             gradient: pinkGradient(),
@@ -31,7 +31,7 @@ class MiniButton extends StatelessWidget {
             Text(
               text,
               textAlign: TextAlign.center,
-              style: headline(),
+              style: headline(s: 20.0),
             ),
             Text(
               (value != '0.0' && value != '0   0') ? value : "",
