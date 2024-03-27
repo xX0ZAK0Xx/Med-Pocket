@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:med_pocket/common/styles/styles.dart';
 import 'package:med_pocket/controller/chip_controller.dart';
 import 'package:med_pocket/controller/dropdown_controller.dart';
+import 'package:med_pocket/controller/medicine_controller.dart';
 import 'package:med_pocket/models/medicine_model.dart';
 import 'package:med_pocket/common/widgets/text_box.dart';
 import 'package:med_pocket/pages/medicine/widget/dropdown.dart';
@@ -15,6 +16,7 @@ Future<dynamic> medicineInfo(BuildContext context, bool isNew,
     {int index = 0, List<String>? existingMedicine}) {
   ChipController chipController = Get.put(ChipController());
   DropDownController dropDownController = Get.put(DropDownController());
+  MedicineController medicineController = Get.put(MedicineController());
 
   TextEditingController name = TextEditingController();
   String selectedType = '';
@@ -102,18 +104,18 @@ Future<dynamic> medicineInfo(BuildContext context, bool isNew,
                         type: chipController.name.value,
                         time: dropDownController.time.value);
                     if (isNew) {
-                      var medicineController;
                       medicineController.addMedicine(med);
                     } else {
-                      var medicineController;
                       medicineController.editMedicine(index, med);
                     }
+                    Navigator.pop(context);
                     name.clear();
                     chipController.name.value = "tablet";
                     chipController.selected.value = 0;
                     dropDownController.time.value = "";
 
                     var user = Hive.box('user');
+                    print(user.get('new'));
                     if (user.get('new') == null) {
                       showDialog(
                           context: context,
@@ -139,7 +141,6 @@ Future<dynamic> medicineInfo(BuildContext context, bool isNew,
                       user.put('new', 'no');
                     }
                   }
-                  Navigator.pop(context);
                 },
                 child: Container(
                   height: 50,

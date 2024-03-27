@@ -68,15 +68,22 @@ class CreateAccount extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        bmi = Calculation.calculateBMI(heightFTController.text,
-                            heightINController.text, weightController.text);
-                        user.put('name', nameController.text);
-                        user.put('weight', double.parse(weightController.text));
-                        DataList.addBMI([
-                          '${DateTime.now().day}/${DateTime.now().month}',
-                          bmi
-                        ]);
-                        Get.offAll(() => const NavigationPage());
+                        if (heightFTController.text != "" &&
+                            heightINController.text != "" &&
+                            weightController.text != "" && nameController.text != "") {
+                          bmi = Calculation.calculateBMI(
+                              heightFTController.text,
+                              heightINController.text,
+                              weightController.text);
+                          user.put('name', nameController.text);
+                          user.put(
+                              'weight', double.parse(weightController.text));
+                          DataList.addBMI([
+                            '${DateTime.now().day}/${DateTime.now().month}',
+                            bmi
+                          ]);
+                          Get.offAll(() => const NavigationPage());
+                        }
                       },
                       child: Container(
                         height: 70,
