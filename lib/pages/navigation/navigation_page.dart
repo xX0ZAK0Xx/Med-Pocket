@@ -29,7 +29,7 @@ class _NavigationPageState extends State<NavigationPage> {
   List pages = [
     HomePage(),
     AddPage(),
-    const MedicinePage(),
+    MedicinePage(),
     ProfilePage(),
   ];
   NavigationController navigationController = Get.put(NavigationController());
