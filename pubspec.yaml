@@ -45,6 +45,7 @@ dependencies:
   flutter_slidable: ^3.1.0
   dropdown_button2: ^2.3.9
   image_picker: ^1.0.7
+  lottie: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,7 @@ flutter:
   assets:
     - assets\icons\medical-check.png
     - assets\icons\height-scale.png
+    - assets\gif\swipe_left.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:lottie/lottie.dart';
 import 'package:med_pocket/common/styles/styles.dart';
 import 'package:med_pocket/common/widgets/text_box.dart';
 import 'package:med_pocket/controller/chip_controller.dart';
@@ -190,7 +192,8 @@ class _MedicinePageState extends State<MedicinePage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (name.text != "") {
+                    if (name.text != "" &&
+                        dropDownController.time.value != "") {
                       var med = Medicine(
                           name: name.text,
                           type: chipController.name.value,
@@ -204,6 +207,33 @@ class _MedicinePageState extends State<MedicinePage> {
                       chipController.name.value = "tablet";
                       chipController.selected.value = 0;
                       dropDownController.time.value = "";
+
+                      var user = Hive.box('user');
+                      if (user.get('new') == null) {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                content: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.3,
+                                  child: Lottie.asset(
+                                      'assets/gif/swipe_left.json'),
+                                ),
+                                actions: [
+                                  Center(
+                                      child: Text(
+                                    "Swipe left the medicine for more options",
+                                    style: headline(w: FontWeight.w500),
+                                    textAlign: TextAlign.center,
+                                  )),
+                                ],
+                              );
+                            });
+                        user.put('new', 'no');
+                      }
                     }
                     Navigator.pop(context);
                   },
@@ -302,6 +332,7 @@ class Selector extends StatelessWidget {
           : selectedType!.toLowerCase() == "syrup"
               ? 1
               : 2;
+      chipController.name.value = selectedType!.toLowerCase();
     }
     return Obx(() => GestureDetector(
           onTap: () {
