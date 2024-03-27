@@ -13,11 +13,13 @@ void main() async {
   var bloodo2 = await Hive.openBox('bloodo2');
   var bloodGlucose = await Hive.openBox('bloodGlucose');
   var pressure = await Hive.openBox('pressure');
+  var medicine = await Hive.openBox('medicine');
 
   DataList.fetchData();
   // user.clear();
   // bmiList.clear();
   // bloodo2.clear();
+  // medicine.clear();
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     home: const SplashScreen(),
