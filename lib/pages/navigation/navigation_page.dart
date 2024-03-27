@@ -30,7 +30,7 @@ class _NavigationPageState extends State<NavigationPage> {
     HomePage(),
     AddPage(),
     const MedicinePage(),
-    const ProfilePage(),
+    ProfilePage(),
   ];
   NavigationController navigationController = Get.put(NavigationController());
   @override

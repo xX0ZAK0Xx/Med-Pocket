@@ -44,6 +44,7 @@ dependencies:
   syncfusion_flutter_charts: ^25.1.35
   flutter_slidable: ^3.1.0
   dropdown_button2: ^2.3.9
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
